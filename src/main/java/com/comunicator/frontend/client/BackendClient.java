@@ -6,6 +6,7 @@ import com.comunicator.frontend.data.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -49,8 +50,15 @@ public class BackendClient {
         }
     }
 
-    public CreatedUser createUser(User user)  {
-        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/user").build().encode().toUri();
-        return restTemplate.postForObject(url, user, CreatedUser.class);
+    public CreatedUser createUser(User user) {
+        try{
+            ResponseEntity<CreatedUser> entity = restTemplate.postForEntity(
+                    "http://localhost:8080/v1/user",
+                    user,
+                    CreatedUser.class);
+            return entity.getBody();
+        }catch (RestClientException e){
+            throw new RuntimeException(e);
+        }
     }
 }

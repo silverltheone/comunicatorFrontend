@@ -15,9 +15,15 @@ public class CreatedUser {
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("name")
+    @JsonProperty("firstName")
+    private String firstName;
+
+    @JsonProperty("lastName")
+    private String lasName;
+
+    @JsonProperty("email")
     private String email;
 
-    @JsonProperty("shortUrl")
-    private String shortUrl;
+
+
 }

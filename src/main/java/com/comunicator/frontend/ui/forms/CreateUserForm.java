@@ -1,5 +1,6 @@
-package com.comunicator.frontend.ui;
+package com.comunicator.frontend.ui.forms;
 
+import com.comunicator.frontend.MainLayout;
 import com.comunicator.frontend.data.User;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
@@ -11,8 +12,10 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
 
+@Route(value = "CreateUser", layout = MainLayout.class)
 public class CreateUserForm extends FormLayout {
 
     TextField firstName = new TextField("First name");

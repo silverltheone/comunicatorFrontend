@@ -1,12 +1,13 @@
 package com.comunicator.frontend.client;
 
 import com.comunicator.frontend.data.CreatedUser;
+import com.comunicator.frontend.data.LoggedUser;
 import com.comunicator.frontend.data.Message;
 import com.comunicator.frontend.data.User;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -38,6 +39,18 @@ public class BackendClient {
         }
     }
 
+    public LoggedUser getByEmailAndPassword(String email, String password) {
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/user/getByEmailAndPassword/" + email + "/" + password).build().encode().toUri();
+
+        try {
+            LoggedUser response = restTemplate.getForObject(url, LoggedUser.class);
+            return response;
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new LoggedUser();
+        }
+    }
+
     public List<Message> getMessages() {
         URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/message").build().encode().toUri();
 
@@ -51,14 +64,10 @@ public class BackendClient {
     }
 
     public CreatedUser createUser(User user) {
-        try{
-            ResponseEntity<CreatedUser> entity = restTemplate.postForEntity(
-                    "http://localhost:8080/v1/user",
-                    user,
-                    CreatedUser.class);
-            return entity.getBody();
-        }catch (RestClientException e){
-            throw new RuntimeException(e);
-        }
+        URI url = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/v1/user")
+                .build().encode().toUri();
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(user);
+        return restTemplate.postForObject(url, jsonContent, CreatedUser.class);
     }
 }

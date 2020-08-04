@@ -14,14 +14,13 @@ import lombok.Setter;
         "senderId",
         "receiverId",
         "sendDate",
-        "message",
         "wasRead"
 })
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-public class Message {
+public class Invitation {
 
     @JsonProperty("id")
     public Long id;
@@ -31,8 +30,6 @@ public class Message {
     public Long receiverId;
     @JsonProperty("sendDate")
     public String sendDate;
-    @JsonProperty("message")
-    public String message;
     @JsonProperty("wasRead")
     public Boolean wasRead;
 }

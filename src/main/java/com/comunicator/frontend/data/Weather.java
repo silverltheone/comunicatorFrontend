@@ -11,28 +11,22 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "id",
-        "senderId",
-        "receiverId",
-        "sendDate",
-        "message",
-        "wasRead"
+        "main",
+        "description",
+        "icon"
 })
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Message {
+public class Weather {
 
     @JsonProperty("id")
-    public Long id;
-    @JsonProperty("senderId")
-    public Long senderId;
-    @JsonProperty("receiverId")
-    public Long receiverId;
-    @JsonProperty("sendDate")
-    public String sendDate;
-    @JsonProperty("message")
-    public String message;
-    @JsonProperty("wasRead")
-    public Boolean wasRead;
+    public Integer id;
+    @JsonProperty("main")
+    public String main;
+    @JsonProperty("description")
+    public String description;
+    @JsonProperty("icon")
+    public String icon;
 }

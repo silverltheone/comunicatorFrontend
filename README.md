@@ -1,6 +1,6 @@
 # KKomunicator-frontend
 ### End Project - Kodilla Course
-### This is fornend of project.
+### This is frontend of project.
 ### Backend localisation: https://github.com/silverltheone/KKomunicator-backend
 #### NOTE1:
 #### Frontend Spring Security configuration is not in development stage and operates on mocked data.
